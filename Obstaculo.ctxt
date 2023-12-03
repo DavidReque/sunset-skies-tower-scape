@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Obstaculo
-comment1.params=x\ y
-comment1.target=Obstaculo(int,\ int)
+comment1.params=x\ y\ color\ width\ height
+comment1.target=Obstaculo(int,\ int,\ java.awt.Color,\ int,\ int)
 comment2.params=
 comment2.target=void\ mover()
 comment3.params=g

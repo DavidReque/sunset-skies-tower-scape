@@ -2,12 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends JFrame {
     private final int WINDOW_WIDTH = 1200; // Ancho de la ventana
     private final int WINDOW_HEIGHT = 800; // Alto de la ventana
     private Avion avion;
-    private Obstaculo obstaculo;
+    private List<Obstaculo> obstaculos; // Lista de obstáculos
     private GamePanel gamePanel;
     private Timer timer; // Declarar el Timer aquí
     private Fondo Fondo;
@@ -21,8 +23,12 @@ public class Main extends JFrame {
         Fondo = new Fondo("fondo.jpg");
 
         avion = new Avion(50, 300, "avion.png"); // Crear una instancia del avión en la posición inicial
-        obstaculo = new Obstaculo(1200, 300); // Crear una instancia del obstáculo en la posición inicial
+        obstaculos = new ArrayList<>(); // Inicializar la lista de obstáculos
 
+        obstaculos.add(new Obstaculo(1200, 570, Color.BLUE, 50, 200));
+        obstaculos.add(new Obstaculo(1500, 600, Color.RED, 70, 150));
+        obstaculos.add(new Obstaculo(1800, 530, Color.GREEN, 60, 180));
+        
         gamePanel = new GamePanel(); // Crear un panel para el juego
         add(gamePanel); // Agregar el panel al JFrame
         gamePanel.setFocusable(true); // Permitir que el panel obtenga el enfoque
@@ -61,7 +67,9 @@ public class Main extends JFrame {
 
         timer = new Timer(10, e -> {
             avion.actualizar(); // Actualizar la posición del avión
-            obstaculo.mover(); // Mover el obstáculo
+             for (Obstaculo obstaculo : obstaculos) {
+                obstaculo.mover(); // Mover cada obstáculo
+            }
             checkCollision(); // Verificar colisiones
             gamePanel.repaint(); // Volver a dibujar el panel de juego
         });
@@ -74,7 +82,9 @@ public class Main extends JFrame {
             super.paintComponent(g);
             Fondo.dibujar(g, this);
             avion.dibujar(g, this); // Dibujar el avión en el panel de juego
-            obstaculo.dibujar(g); // Dibujar el obstáculo en el panel de juego
+            for (Obstaculo obstaculo : obstaculos) {
+                obstaculo.dibujar(g);
+            }        
         }
     }
 
@@ -82,6 +92,8 @@ public class Main extends JFrame {
     private void checkCollision() {
         int avionX = avion.getX();
         int avionY = avion.getY();
+        
+        for (Obstaculo obstaculo : obstaculos) {
         int obstaculoX = obstaculo.getX();
         int obstaculoY = obstaculo.getY();
 
@@ -93,6 +105,7 @@ public class Main extends JFrame {
             reiniciarJuego();
         }
     }
+}
     
     // Método para reiniciar el juego
     private void reiniciarJuego() {
@@ -101,8 +114,11 @@ public class Main extends JFrame {
 
         // Restablecer las posiciones iniciales del avión y el obstáculo
         avion = new Avion(50, 300, "avion.png");
-        obstaculo = new Obstaculo(1200, 300);
-
+        obstaculos = new ArrayList<>();
+        obstaculos.add(new Obstaculo(1200, 570, Color.BLUE, 50, 200));
+        obstaculos.add(new Obstaculo(1500, 600, Color.RED, 70, 150));
+        obstaculos.add(new Obstaculo(1800, 530, Color.GREEN, 60, 180));
+        
         // Volver a iniciar el temporizador
         timer.start();
     }
