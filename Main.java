@@ -10,6 +10,7 @@ public class Main extends JFrame {
     private Obstaculo obstaculo;
     private GamePanel gamePanel;
     private Timer timer; // Declarar el Timer aquí
+    private Fondo Fondo;
 
     // Constructor de la clase Main
     public Main() {
@@ -17,6 +18,7 @@ public class Main extends JFrame {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        Fondo = new Fondo("fondo.jpg");
 
         avion = new Avion(50, 300); // Crear una instancia del avión en la posición inicial
         obstaculo = new Obstaculo(1200, 300); // Crear una instancia del obstáculo en la posición inicial
@@ -70,6 +72,7 @@ public class Main extends JFrame {
     private class GamePanel extends JPanel {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
+            Fondo.dibujar(g, this);
             avion.dibujar(g); // Dibujar el avión en el panel de juego
             obstaculo.dibujar(g); // Dibujar el obstáculo en el panel de juego
         }

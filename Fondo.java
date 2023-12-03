@@ -1,33 +1,14 @@
+import javax.swing.*;
+import java.awt.*;
 
-/**
- * Write a description of class Fondo here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Fondo
-{
-    // instance variables - replace the example below with your own
-    private int x;
+public class Fondo {
+    private Image imagen;
 
-    /**
-     * Constructor for objects of class Fondo
-     */
-    public Fondo()
-    {
-        // initialise instance variables
-        x = 0;
+    public Fondo(String rutaImagen) {
+        imagen = new ImageIcon(rutaImagen).getImage();
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void dibujar(Graphics g, JPanel panel) {
+        g.drawImage(imagen, 0, 0, panel.getWidth(), panel.getHeight(), panel);
     }
 }
