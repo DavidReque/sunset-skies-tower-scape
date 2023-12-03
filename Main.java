@@ -20,7 +20,7 @@ public class Main extends JFrame {
         setLocationRelativeTo(null);
         Fondo = new Fondo("fondo.jpg");
 
-        avion = new Avion(50, 300); // Crear una instancia del avión en la posición inicial
+        avion = new Avion(50, 300, "avion.png"); // Crear una instancia del avión en la posición inicial
         obstaculo = new Obstaculo(1200, 300); // Crear una instancia del obstáculo en la posición inicial
 
         gamePanel = new GamePanel(); // Crear un panel para el juego
@@ -73,7 +73,7 @@ public class Main extends JFrame {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Fondo.dibujar(g, this);
-            avion.dibujar(g); // Dibujar el avión en el panel de juego
+            avion.dibujar(g, this); // Dibujar el avión en el panel de juego
             obstaculo.dibujar(g); // Dibujar el obstáculo en el panel de juego
         }
     }
@@ -100,7 +100,7 @@ public class Main extends JFrame {
         timer.stop();
 
         // Restablecer las posiciones iniciales del avión y el obstáculo
-        avion = new Avion(50, 300);
+        avion = new Avion(50, 300, "avion.png");
         obstaculo = new Obstaculo(1200, 300);
 
         // Volver a iniciar el temporizador

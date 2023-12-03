@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Avion
-comment1.params=x\ y
-comment1.target=Avion(int,\ int)
+comment1.params=x\ y\ rutaImagen
+comment1.target=Avion(int,\ int,\ java.lang.String)
 comment2.params=
 comment2.target=void\ actualizar()
 comment3.params=
@@ -14,6 +14,6 @@ comment6.params=
 comment6.target=int\ getX()
 comment7.params=
 comment7.target=int\ getY()
-comment8.params=g
-comment8.target=void\ dibujar(java.awt.Graphics)
+comment8.params=g\ panel
+comment8.target=void\ dibujar(java.awt.Graphics,\ javax.swing.JPanel)
 numComments=9
