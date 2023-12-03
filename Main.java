@@ -25,9 +25,11 @@ public class Main extends JFrame {
         avion = new Avion(50, 300, "avion.png"); // Crear una instancia del avión en la posición inicial
         obstaculos = new ArrayList<>(); // Inicializar la lista de obstáculos
 
-        obstaculos.add(new Obstaculo(1200, 570, Color.BLUE, 50, 200));
-        obstaculos.add(new Obstaculo(1500, 600, Color.RED, 70, 150));
-        obstaculos.add(new Obstaculo(1800, 530, Color.GREEN, 60, 180));
+        obstaculos.add(new Obstaculo(1200, 500, 275, 275, "edificio.png"));
+        obstaculos.add(new Obstaculo(1500, 450, 320, 330, "edificio2.png"));
+        obstaculos.add(new Obstaculo(1800, 425, 350, 340, "edificio3.png"));
+        obstaculos.add(new Obstaculo(2200, 563, 200, 200, "casa.png"));
+        obstaculos.add(new Obstaculo(2800, 500, 280, 298, "edificio4.png"));
         
         gamePanel = new GamePanel(); // Crear un panel para el juego
         add(gamePanel); // Agregar el panel al JFrame
@@ -115,9 +117,11 @@ public class Main extends JFrame {
         // Restablecer las posiciones iniciales del avión y el obstáculo
         avion = new Avion(50, 300, "avion.png");
         obstaculos = new ArrayList<>();
-        obstaculos.add(new Obstaculo(1200, 570, Color.BLUE, 50, 200));
-        obstaculos.add(new Obstaculo(1500, 600, Color.RED, 70, 150));
-        obstaculos.add(new Obstaculo(1800, 530, Color.GREEN, 60, 180));
+        obstaculos.add(new Obstaculo(1200, 500, 275, 275, "edificio.png"));
+        obstaculos.add(new Obstaculo(1500, 450, 320, 330, "edificio2.png"));
+        obstaculos.add(new Obstaculo(1800, 425, 350, 340, "edificio3.png"));
+        obstaculos.add(new Obstaculo(2200, 563, 200, 200, "casa.png"));
+        obstaculos.add(new Obstaculo(2800, 500, 280, 298, "edificio4.png"));
         
         // Volver a iniciar el temporizador
         timer.start();
