@@ -8,7 +8,6 @@ public class Obstaculo {
     private int x, y; // Posición del obstáculo
     private int width, height; // Dimensiones del obstáculo
     private final int velocidad = 5; // Velocidad del obstáculo
-    private Color color; // Color del obstáculo
     private Image imagen;
 
     // Constructor de la clase Obstaculo que recibe las coordenadas x e y iniciales, el color, ancho y alto del obstáculo
@@ -27,7 +26,6 @@ public class Obstaculo {
         x = 1200; // Reposiciona el obstáculo al final de la ventana en el lado derecho
     }
 }
-
 
     // Método para dibujar el obstáculo en la ventana
     public void dibujar(Graphics g) {
