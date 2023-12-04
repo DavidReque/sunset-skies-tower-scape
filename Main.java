@@ -222,6 +222,7 @@ public class Main extends JFrame {
         return true; // Devuelve true si hay una colisión
         }   
     }
+    
     return false; // Devuelve false si no hay ninguna colisión
 }
     
@@ -253,7 +254,6 @@ public class Main extends JFrame {
     // Volver a iniciar el temporizador
     timer.start();
 }
-
 
     // Método principal para iniciar la aplicación
     public static void main(String[] args) {
