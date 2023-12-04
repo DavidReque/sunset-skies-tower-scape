@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -8,6 +7,7 @@ public class Avion {
     private int x, y; // Posición del avión
     private int velocidadY; // Velocidad de movimiento vertical del avión
     private Image imagen;
+    private boolean visible; // Indica si el avión es visible o no
 
     // Constructor de la clase Avion que recibe las coordenadas x e y iniciales
     public Avion(int x, int y, String rutaImagen) {
@@ -15,19 +15,19 @@ public class Avion {
         this.x = x;
         this.y = y;
         this.velocidadY = 0; // Inicialmente sin movimiento
+        this.visible = true; // Por defecto, el avión es visible
     }
 
-    // Método para actualizar la posición vertical del avión
+    // Métodos para actualizar la posición vertical del avión
     public void actualizar() {
         y += velocidadY; // Actualiza la posición vertical del avión basándose en la velocidad vertical
     }
 
-    // Método para mover el avión hacia arriba
+    // Métodos para mover el avión hacia arriba y hacia abajo
     public void moverArriba() {
         velocidadY = -3; // Establece una velocidad negativa para mover el avión hacia arriba
     }
 
-    // Método para mover el avión hacia abajo
     public void moverAbajo() {
         velocidadY = 3; // Establece una velocidad positiva para mover el avión hacia abajo
     }
@@ -47,8 +47,20 @@ public class Avion {
         return y;
     }
 
+    // Método para establecer la visibilidad del avión
+    public void setVisibilidad(boolean visible) {
+        this.visible = visible;
+    }
+
+    // Método para obtener la visibilidad actual del avión
+    public boolean isVisibilidad() {
+        return visible;
+    }
+
     // Método para dibujar el avión en la ventana
     public void dibujar(Graphics g, JPanel panel) {
-        g.drawImage(imagen, x, y, 80, 80, panel);
+        if (visible) {
+            g.drawImage(imagen, x, y, 80, 80, panel);
+        }
     }
 }
