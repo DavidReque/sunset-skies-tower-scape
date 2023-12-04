@@ -18,7 +18,6 @@ public class Main extends JFrame {
     private Timer timer; // Declarar el Timer aquí
     private Fondo Fondo;
     private JLabel contadorLabel;
-    private boolean quiereJugar = true; // Variable para controlar si el usuario quiere jugar
 
     // Constructor de la clase Main
     public Main() {
@@ -178,9 +177,21 @@ public class Main extends JFrame {
             reiniciarJuego();
             Explosion explosion = new Explosion(obstaculoX, obstaculoY, "explosion.gif");
             explosiones.add(explosion); // Agrega la nueva explosión a la lista de explosiones
+
+            timer.stop(); // Detiene el Timer
+            // Muestra un cuadro de diálogo preguntando si el jugador quiere jugar de nuevo
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿quieres seguir jugando?", "Has chocado", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.NO_OPTION) {
+                System.exit(0); // Cierra el juego si el jugador selecciona "No"
+            }   
+
             TIEMPO = 0; // Reinicia el contador
             contadorLabel.setText("00:00"); // Actualiza el texto del contador a cero
+
+            timer.start(); // Reinicia el Timer
+
             return true; // Devuelve true si hay una colisión
+             // Devuelve true si hay una colisión
         }
     }
 
@@ -189,19 +200,28 @@ public class Main extends JFrame {
         int globoY = globo.getY();
 
         if (avionX < globoX + 50 &&
-            avionX + 50 > globoX &&
-            avionY < globoY + 50 &&
-            avionY + 30 > globoY) {
-            // Si hay colisión con un globo, se ejecuta la lógica para reiniciar el juego
-            reiniciarJuego();
-            Explosion explosion = new Explosion(globoX, globoY, "explosion.gif");
-            explosiones.add(explosion); // Agrega la nueva explosión a la lista de explosiones
-            TIEMPO = 0; // Reinicia el contador
-            contadorLabel.setText("00:00"); // Actualiza el texto del contador a cero
-            return true; // Devuelve true si hay una colisión
-        }
-    }
+        avionX + 50 > globoX &&
+        avionY < globoY + 50 &&
+        avionY + 30 > globoY) {
+        // Si hay colisión con un obstáculo, se ejecuta la lógica para reiniciar el juego
+        reiniciarJuego();
+        Explosion explosion = new Explosion(globoX, globoY, "explosion.gif");
+        explosiones.add(explosion); // Agrega la nueva explosión a la lista de explosiones
 
+        timer.stop(); // Detiene el Timer
+        // Muestra un cuadro de diálogo preguntando si el jugador quiere jugar de nuevo
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿quieres seguir jugando?", "Has chocado", JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.NO_OPTION) {
+        System.exit(0); // Cierra el juego si el jugador selecciona "No"
+        }   
+    
+        TIEMPO = 0; // Reinicia el contador
+        contadorLabel.setText("00:00"); // Actualiza el texto del contador a cero
+        timer.start(); // Reinicia el Timer
+
+        return true; // Devuelve true si hay una colisión
+        }   
+    }
     return false; // Devuelve false si no hay ninguna colisión
 }
     
