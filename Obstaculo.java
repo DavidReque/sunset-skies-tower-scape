@@ -7,7 +7,7 @@ import java.awt.Image;
 public class Obstaculo {
     private int x, y; // Posición del obstáculo
     private int width, height; // Dimensiones del obstáculo
-    private final int velocidad = 5; // Velocidad del obstáculo
+    private int velocidad = 5; // Velocidad del obstáculo
     private Image imagen;
 
     // Constructor de la clase Obstaculo que recibe las coordenadas x e y iniciales, el color, ancho y alto del obstáculo
@@ -40,5 +40,9 @@ public class Obstaculo {
     // Método para obtener la coordenada y del obstáculo
     public int getY() {
         return y;
+    }
+    
+    public void incrementarVelocidad() {
+        velocidad += 5; // Incrementa la velocidad en 1
     }
 }

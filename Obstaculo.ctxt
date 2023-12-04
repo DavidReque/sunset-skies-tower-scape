@@ -10,4 +10,6 @@ comment4.params=
 comment4.target=int\ getX()
 comment5.params=
 comment5.target=int\ getY()
-numComments=6
+comment6.params=
+comment6.target=void\ incrementarVelocidad()
+numComments=7

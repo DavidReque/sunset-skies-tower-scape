@@ -6,7 +6,7 @@ import java.awt.Image;
 public class Globo {
     private int x, y; // Posición del obstáculo
     private int width, height; // Dimensiones del obstáculo
-    private final int velocidad = 5; // Velocidad del obstáculo
+    private int velocidad = 5; // Velocidad del obstáculo
     private Image imagen;
 
     // Constructor de la clase Globo que recibe las coordenadas x e y iniciales, el ancho y alto del globo, y la ruta de la imagen
@@ -46,5 +46,9 @@ public class Globo {
 
     public int getY() {
         return y;
+    }
+    
+    public void incrementarVelocidad() {
+        velocidad += 4; // Incrementa la velocidad en 1
     }
 }

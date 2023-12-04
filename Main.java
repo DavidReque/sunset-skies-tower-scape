@@ -4,16 +4,19 @@ import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Timer;
 
 public class Main extends JFrame {
     private final int WINDOW_WIDTH = 1200; // Ancho de la ventana
     private final int WINDOW_HEIGHT = 800; // Alto de la ventana
+    private int TIEMPO = 0;
     private Avion avion;
     private List<Obstaculo> obstaculos; // Lista de obstáculos
     private List<Globo> globos; 
     private GamePanel gamePanel;
     private Timer timer; // Declarar el Timer aquí
     private Fondo Fondo;
+    private JLabel contadorLabel;
 
     // Constructor de la clase Main
     public Main() {
@@ -21,6 +24,10 @@ public class Main extends JFrame {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
+        contadorLabel = new JLabel();
+        contadorLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        contadorLabel.setForeground(Color.WHITE);
         
         Fondo = new Fondo("fondo.jpg");
 
@@ -42,7 +49,8 @@ public class Main extends JFrame {
         add(gamePanel); // Agregar el panel al JFrame
         gamePanel.setFocusable(true); // Permitir que el panel obtenga el enfoque
         gamePanel.requestFocusInWindow(); // Solicitar el enfoque al panel
-
+        gamePanel.add(contadorLabel);
+        
         // Configurar los KeyBindings para manejar las teclas de flecha
         gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "Up");
         gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released UP"), "Released Up");
@@ -74,6 +82,30 @@ public class Main extends JFrame {
             }
         });
 
+        timer = new Timer(1000, e -> {
+        TIEMPO++;
+        int minutos = TIEMPO / 60;
+        int segundos = TIEMPO % 60;
+        contadorLabel.setText(String.format("%02d:%02d", minutos, segundos));
+    
+    // Incrementar la velocidad de los obstáculos y globos cada 30 segundos
+    if (TIEMPO % 30 == 0) {
+        for (Obstaculo obstaculo : obstaculos) {
+            obstaculo.incrementarVelocidad();
+        }
+        for (Globo globo : globos) {
+            globo.incrementarVelocidad();
+        }
+    }
+
+    // Verificar las colisiones y reiniciar el tiempo transcurrido si hay una colisión
+    if (checkCollision()) {
+        TIEMPO = 0;
+        contadorLabel.setText("00:00");
+    }
+    });
+        timer.start();
+        
         timer = new Timer(10, e -> {
             avion.actualizar(); // Actualizar la posición del avión
              for (Obstaculo obstaculo : obstaculos) {
@@ -104,7 +136,7 @@ public class Main extends JFrame {
     }
 
     // Método para verificar colisiones entre el avión y el obstáculo
-    private void checkCollision() {
+    private boolean checkCollision() {
     int avionX = avion.getX();
     int avionY = avion.getY();
 
@@ -118,6 +150,9 @@ public class Main extends JFrame {
             avionY + 30 > obstaculoY) {
             // Si hay colisión con un obstáculo, se ejecuta la lógica para reiniciar el juego
             reiniciarJuego();
+            TIEMPO = 0; // Reinicia el contador
+            contadorLabel.setText("00:00"); // Actualiza el texto del contador a cero
+            return true; // Devuelve true si hay una colisión
         }
     }
 
@@ -131,31 +166,44 @@ public class Main extends JFrame {
             avionY + 30 > globoY) {
             // Si hay colisión con un globo, se ejecuta la lógica para reiniciar el juego
             reiniciarJuego();
+            TIEMPO = 0; // Reinicia el contador
+            contadorLabel.setText("00:00"); // Actualiza el texto del contador a cero
+            return true; // Devuelve true si hay una colisión
         }
     }
-}
 
+    return false; // Devuelve false si no hay ninguna colisión
+}
     
     // Método para reiniciar el juego
     private void reiniciarJuego() {
-        // Detener el temporizador
-        timer.stop();
+    // Detener el temporizador
+    timer.stop();
 
-        // Restablecer las posiciones iniciales del avión y el obstáculo
-        avion = new Avion(50, 300, "avion.png");
-        obstaculos = new ArrayList<>();
-        obstaculos.add(new Obstaculo(1200, 500, 275, 275, "edificio.png"));
-        obstaculos.add(new Obstaculo(1500, 450, 320, 330, "edificio2.png"));
-        obstaculos.add(new Obstaculo(1800, 425, 350, 340, "edificio3.png"));
-        obstaculos.add(new Obstaculo(2200, 563, 200, 200, "casa.png"));
-        obstaculos.add(new Obstaculo(2800, 500, 280, 298, "edificio4.png"));
-        globos.add(new Globo(3300, 300, 50, 50, "globo.png"));
-        globos.add(new Globo(3000, 225, 50, 50, "globo2.png"));
-        globos.add(new Globo(3500, 200, 50, 50, "globos.png"));
-        
-        // Volver a iniciar el temporizador
-        timer.start();
-    }
+    // Restablecer las listas a su estado inicial
+    obstaculos.clear();
+    globos.clear();
+
+    // Volver a agregar los obstáculos iniciales
+    obstaculos.add(new Obstaculo(1200, 500, 275, 275, "edificio.png"));
+    obstaculos.add(new Obstaculo(1500, 450, 320, 330, "edificio2.png"));
+    obstaculos.add(new Obstaculo(1800, 425, 350, 340, "edificio3.png"));
+    obstaculos.add(new Obstaculo(2200, 563, 200, 200, "casa.png"));
+    obstaculos.add(new Obstaculo(2800, 500, 280, 298, "edificio4.png"));
+
+    // Volver a agregar los globos iniciales
+    globos.add(new Globo(3300, 300, 50, 50, "globo.png"));
+    globos.add(new Globo(3000, 225, 50, 50, "globo2.png"));
+    globos.add(new Globo(4000, 150, 50, 50, "globos.png"));
+
+    // Reiniciar el contador
+    TIEMPO = 0;
+    contadorLabel.setText("00:00");
+
+    // Volver a iniciar el temporizador
+    timer.start();
+}
+
 
     // Método principal para iniciar la aplicación
     public static void main(String[] args) {
