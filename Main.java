@@ -60,31 +60,8 @@ public class Main extends JFrame {
         gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "Down");
         gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released DOWN"), "Released Down");
 
-        // Configurar las acciones para las teclas de flecha
-        gamePanel.getActionMap().put("Up", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                avion.moverArriba(); // Mover el avión hacia arriba cuando se presiona la tecla hacia arriba
-            }
-        });
-
-        gamePanel.getActionMap().put("Released Up", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                avion.detener(); // Detener el movimiento del avión cuando se suelta la tecla hacia arriba
-            }
-        });
-
-        gamePanel.getActionMap().put("Down", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                avion.moverAbajo(); // Mover el avión hacia abajo cuando se presiona la tecla hacia abajo
-            }
-        });
-
-        gamePanel.getActionMap().put("Released Down", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                avion.detener(); // Detener el movimiento del avión cuando se suelta la tecla hacia abajo
-            }
-        });
-
+        gamePanel.addKeyListener(avion);
+        
         timer = new Timer(1000, e -> {
         TIEMPO++;
         int minutos = TIEMPO / 60;

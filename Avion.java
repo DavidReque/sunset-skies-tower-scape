@@ -2,12 +2,39 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Avion {
+public class Avion implements KeyListener {
     private int x, y; // Posición del avión
     private int velocidadY; // Velocidad de movimiento vertical del avión
     private Image imagen;
     private boolean visible; // Indica si el avión es visible o no
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Código relacionado a la tecla presionada pero sin implementación específica en este caso
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_UP) {
+            moverArriba();
+        } else if (key == KeyEvent.VK_DOWN) {
+            moverAbajo();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN) {
+            detener();
+        }
+    }
 
     // Constructor de la clase Avion que recibe las coordenadas x e y iniciales
     public Avion(int x, int y, String rutaImagen) {
