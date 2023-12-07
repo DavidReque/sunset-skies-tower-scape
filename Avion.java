@@ -11,12 +11,10 @@ public class Avion implements KeyListener {
     private Image imagen;
     private boolean visible; // Indica si el avión es visible o no
     
-    @Override
     public void keyTyped(KeyEvent e) {
-        // Código relacionado a la tecla presionada pero sin implementación específica en este caso
+
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
@@ -27,7 +25,6 @@ public class Avion implements KeyListener {
         }
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
 

@@ -4,12 +4,11 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public class Globo {
-    private int x, y; // Posición del obstáculo
-    private int width, height; // Dimensiones del obstáculo
-    private int velocidad = 5; // Velocidad del obstáculo
+    private int x, y;
+    private int width, height; 
+    private int velocidad = 5; 
     private Image imagen;
 
-    // Constructor de la clase Globo que recibe las coordenadas x e y iniciales, el ancho y alto del globo, y la ruta de la imagen
     public Globo(int x, int y, int width, int height, String rutaImagen) {
         this.x = x;
         this.y = y;
@@ -18,28 +17,24 @@ public class Globo {
         this.imagen = new ImageIcon(rutaImagen).getImage();
     }
 
-    // Método para mover el globo hacia la izquierda
     public void mover() {
-        x -= velocidad; // Resta la velocidad a la coordenada x, moviendo el globo hacia la izquierda
-        if (x < -width) { // Si el globo sale de la pantalla por la izquierda
-            // Reposicionar el globo al azar en el lado derecho de la ventana con una posición Y aleatoria
+        x -= velocidad; 
+        if (x < -width) { 
             x = 1400;
-            y = generateRandomY();
+            y = globoRandom();
         }
     }
 
     // Método para generar una posición Y aleatoria dentro de la ventana
-    private int generateRandomY() {
+    private int globoRandom() {
         Random random = new Random();
-        return random.nextInt(600); // Cambia el valor máximo según la altura de tu ventana
+        return random.nextInt(600); // Cambia el valor de la altura
     }
 
-    // Método para dibujar el globo en la ventana
     public void dibujar(Graphics g) {
         g.drawImage(imagen, x, y, width, height, null);
     }
 
-    // Métodos para obtener las coordenadas x e y del globo
     public int getX() {
         return x;
     }
@@ -49,6 +44,6 @@ public class Globo {
     }
     
     public void incrementarVelocidad() {
-        velocidad += 4; // Incrementa la velocidad en 1
+        velocidad += 4;
     }
 }

@@ -5,12 +5,11 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public class Obstaculo {
-    private int x, y; // Posición del obstáculo
-    private int width, height; // Dimensiones del obstáculo
-    private int velocidad = 5; // Velocidad del obstáculo
+    private int x, y; 
+    private int width, height; //Alto y ancho
+    private int velocidad = 5; //Velocidad del obstáculo
     private Image imagen;
 
-    // Constructor de la clase Obstaculo que recibe las coordenadas x e y iniciales, el color, ancho y alto del obstáculo
     public Obstaculo(int x, int y,int width, int height, String rutaImagen) {
         this.x = x;
         this.y = y;
@@ -27,22 +26,19 @@ public class Obstaculo {
     }
 }
 
-    // Método para dibujar el obstáculo en la ventana
     public void dibujar(Graphics g) {
         g.drawImage(imagen, x, y, width, height, null);
     }
 
-    // Método para obtener la coordenada x del obstáculo
     public int getX() {
         return x;
     }
 
-    // Método para obtener la coordenada y del obstáculo
     public int getY() {
         return y;
     }
     
     public void incrementarVelocidad() {
-        velocidad += 5; // Incrementa la velocidad en 1
+        velocidad += 5; // Incrementa la velocidad en 5
     }
 }

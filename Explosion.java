@@ -14,7 +14,7 @@ public class Explosion {
         this.imagen = new ImageIcon(rutaImagen).getImage();
     }
 
-    public void draw(Graphics g, ImageObserver observer) {
+    public void dibujarGif(Graphics g, ImageObserver observer) {
         g.drawImage(imagen, x, y, observer);
         contador++;
     }
